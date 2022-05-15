@@ -5,27 +5,37 @@
   <head>
 
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Official WebPage of Sa'Aadat-ul-uloom">
+    <meta data-rh="true" property="og:title" content="sa'Aadat-ul Uloom:Home">
+    <meta data-rh="true" property="og:description" content="View portal">
+    <meta name="theme-color" content="#493174">
+
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
 
-    <title>DocsKeeper Home</title>
+    <title>Sa'Aadat-ul-uloom</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static '/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
-<!--
 
-TemplateMo 546 Sixteen Clothing
+    <link href="{% static 'plugins/custom/fullcalendar/fullcalendar.bundle.css' %}" rel="stylesheet" type="text/css" />
+    <!--end::Page Vendors Styles-->
+    <!--begin::Global Theme Styles(used by all pages)-->
+    <link href="{% static 'plugins/global/plugins.bundle.css' %}" rel="stylesheet" type="text/css" />
+    <link href="{% static 'plugins/custom/prismjs/prismjs.bundle.css' %}" rel="stylesheet" type="text/css" />
 
-https://templatemo.com/tm-546-sixteen-clothing
-
--->
+    <script src="{% static 'plugins/global/plugins.bundle.js' %}"></script>
+    <script src="{% static 'plugins/custom/prismjs/prismjs.bundle.js' %}"></script>
+    <!--end::Global Theme Bundle-->
+    <!--begin::Page Vendors(used by this page)-->
+    <script src="{% static 'plugins/custom/fullcalendar/fullcalendar.bundle.js' %}"></script>
 
     <!-- Additional CSS Files -->
     <link rel="stylesheet" href="{% static '/assets/css/fontawesome.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/templatemo-sixteen.css' %}">
     <link rel="stylesheet" href="{% static '/assets/css/owl.css' %}">
+    {% block css %}
+    {% endblock %}
 
   </head>
 
@@ -45,30 +55,52 @@ https://templatemo.com/tm-546-sixteen-clothing
     <header class="">
       <nav class="navbar navbar-expand-lg">
         <div class="container">
+          <img src="{% static 'images/saadat1.jpeg' %}" width="60" height="60" class="mr-3">
           <a class="navbar-brand" href="{% url 'main_website:home' %}"><h2><em>Madarsa Sa'Aadat-ul Uloom</em></h2></a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-              <li class="nav-item ">
-                <a class="nav-link" href="{% url 'main_website:home' %}">Home
-                </a>
-              </li> 
+              {% if tab == "home" %}
               <li class="nav-item active">
-                <a class="nav-link" href="{% url 'students:std_home' %}">Students</a>
-              </li>
+              {% else %}
               <li class="nav-item">
-                <a class="nav-link" href="about.html">Staff</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contact.html">Finances</a>
-              </li>
-              <li class="nav-item">
+              {% endif %}
+                  <a class="nav-link" href="{% url 'main_website:home' %}">
                 
+                Home</a>
               </li>
+              {% if user.is_authenticated %} 
+                {% if tab == "students" %}
+                <li class="nav-item active">
+                {% else %}
+                <li class="nav-item">
+                {% endif %}
+                  <a class="nav-link" href="{% url 'students:std_home' %}">Students</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Administration</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Finances</a>
+                </li>
+              {% endif %}
+              <li class="nav-item">
+                <a class="nav-link" href="#">About</a>
+              </li>
+              {% if user.is_authenticated %}
+              <li class="nav-item" style="float: left;">
+                <a class="nav-link" href="{% url 'user:logout' %}">Logout</a>
+              </li>
+              {% else %}
+              <li class="nav-item" style="float: left;">
+                <a class="nav-link" href="{% url 'user:login' %}">Login</a>
+              </li>
+              {% endif %}
             </ul>
           </div>
+          <a >Login</a>
         </div>
       </nav>
     </header>
@@ -91,10 +123,10 @@ https://templatemo.com/tm-546-sixteen-clothing
 
 
     <!-- Bootstrap core JavaScript -->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-
     <!-- Additional Scripts -->
     <script src="{% static '/assets/js/custom.js' %}"></script>
     <script src="{% static '/assets/js/owl.js' %}"></script>
@@ -118,3 +150,5 @@ https://templatemo.com/tm-546-sixteen-clothing
   </body>
 
 </html>
+{% block java_script %}
+{% endblock %}

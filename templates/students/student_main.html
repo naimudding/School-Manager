@@ -4,8 +4,6 @@
     <!-- Page Content -->
     <div class="banner header-text">
     </div>
-
-
     <div class="call-to-action">
       <div class="container">
         <div class="row">
@@ -16,10 +14,10 @@
                   <h3>Students List</h3>
                 </div>
                 <div class="col-md-1">
-                  <a href="#" class="filled-button"><i class="fa fa-tasks" style="font-size:30px;"></i></a>
+                  <a href="{% url 'students:list_student' %}" class="filled-button" title="Students list"><i class="fa fa-tasks" style="font-size:30px;"></i></a>
                 </div>
                 <div class="col-md-1">
-                  <a href="#" class="filled-button"><i class="fa fa-plus-square" style="font-size:30px;"></i></a>
+                  <a href="{% url 'students:add_student' %}" class="filled-button" title="Add Student"><i class="fa fa-plus-square" style="font-size:30px;"></i></a>
                 </div>
               </div>
             </div>

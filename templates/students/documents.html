@@ -1,0 +1,232 @@
+{% extends 'main_website/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+{% block css %}
+<style type="text/css">
+	* {
+	    margin: 0;
+	    padding: 0;
+	}
+
+	html {
+	    height: 100%;
+	}
+	.container-fluid {
+	    padding-top: 50px;
+	}
+
+	/*Background color*/
+	#grad1 {
+	    background-color: : #9C27B0;
+	    background-image: linear-gradient(120deg, #FF4081, #81D4FA);
+	}
+
+	/*form styles*/
+	#msform {
+	    text-align: center;
+	    position: relative;
+	    margin-top: 20px;
+	}
+
+	#msform fieldset .form-card {
+	    background: white;
+	    border: 0 none;
+	    border-radius: 0px;
+	    box-shadow: 0 2px 2px 2px rgba(0, 0, 0, 0.2);
+	    padding: 20px 40px 30px 40px;
+	    box-sizing: border-box;
+	    width: 94%;
+	    margin: 0 3% 20px 3%;
+
+	    /*stacking fieldsets above each other*/
+	    position: relative;
+	}
+
+	#msform fieldset {
+	    background: white;
+	    border: 0 none;
+	    border-radius: 0.5rem;
+	    box-sizing: border-box;
+	    width: 100%;
+	    margin: 0;
+	    padding-bottom: 20px;
+
+	    /*stacking fieldsets above each other*/
+	    position: relative;
+	}
+
+	/*Hide all except first fieldset*/
+	#msform fieldset:not(:first-of-type) {
+	    display: none;
+	}
+
+	#msform fieldset .form-card {
+	    text-align: left;
+	    color: #9E9E9E;
+	}
+
+
+	/*Blue Buttons*/
+	#msform .action-button {
+	    width: 100px;
+	    background: skyblue;
+	    font-weight: bold;
+	    color: white;
+	    border: 0 none;
+	    border-radius: 0px;
+	    cursor: pointer;
+	    padding: 10px 5px;
+	    margin: 10px 5px;
+	}
+
+	/*Dropdown List Exp Date*/
+	select.list-dt {
+	    border: none;
+	    outline: 0;
+	    border-bottom: 1px solid #ccc;
+	    padding: 2px 5px 3px 5px;
+	    margin: 2px;
+	}
+
+	select.list-dt:focus {
+	    border-bottom: 2px solid skyblue;
+	}
+
+	/*The background card*/
+	.card {
+	    z-index: 0;
+	    border: none;
+	    border-radius: 0.5rem;
+	    position: relative;
+	}
+
+	/*FieldSet headings*/
+	.fs-title {
+	    font-size: 25px;
+	    color: #2C3E50;
+	    margin-bottom: 10px;
+	    font-weight: bold;
+	    text-align: left;
+	}
+	a.hidden {
+	    display: none;
+	}
+
+
+	/*ProgressBar before any progress*/
+	/*Imaged Radio Buttons*/
+
+	/*Fit image in bootstrap div*/
+	.fit-image{
+	    width: 100%;
+	    object-fit: cover;
+	}
+</style>
+{% endblock %}
+
+{% block content %}
+<!-- MultiStep Form -->
+
+<div class="container-fluid" id="grad1">
+
+    <div class="row justify-content-center mt-0">
+        <div class="col-11 col-sm-9 col-md-7 col-lg-6 text-center p-0 mt-3 mb-2">
+            <div class="card px-0 pt-4 pb-0 mt-4 mb-3">
+                <h2><strong>View and Upload Documents</strong></h2>
+                <div class="row ml-5">
+                    <div class="col-md-12 mx-0">
+                        <form id="msform" method="POST" action="" enctype="multipart/form-data">
+                            <!-- progressbar -->
+   							{% csrf_token %}                            <!-- fieldsets -->
+                            {% for message in messages %}
+		  						{% if 'error' in message.tags %}
+	                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+								  <strong>{{ message }}</strong>
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								{% endif %}
+								{% if 'success' in message.tags %}
+								<div class="alert alert-success alert-dismissible fade show" role="alert">
+								  <strong>{{ message }}</strong>
+								  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								    <span aria-hidden="true">&times;</span>
+								  </button>
+								</div>
+								{% endif %}
+							{% endfor %}
+							<fieldset>
+	                        	<div class="form-card">
+	             
+	                                <div class="form-group row">
+									    <input type="text" class="form-control col-4 mr-2" value="Passport Size Picture" disabled>
+									    {% if student.picture %}
+									    
+									    	<a href="{{ student.picture.url }}" tilte="view"class="col-4"><i class='fa fa-file-image-o' style='font-size:36px'></i></a>
+									    {% else %}
+									    	<input type="file" accept="image/*" class="form-control col-4" name="picture">
+									    {% endif %}
+									</div>
+									<div class="form-group row">
+									    <input type="text" class="form-control col-4 mr-2" value="Aadhar Card" disabled>
+									    {% if student.aadhar %}
+									    	<a href="{{ student.aadhar.url }}" tilte="view"class="col-4"><i class='fa fa-file-o' style='font-size:36px'></i></a>
+									    	
+									    {% else %}
+									    	<input type="file" class="form-control col-4" name="aadhar">
+									    {% endif %}
+									</div>
+									{% for doc in student_docs %}
+										<div class="form-group row">
+										    <input type="text" class="form-control col-4 mr-2" value="{{ doc.document_name }}" disabled>
+										    <a href="{{ doc.document_path.url }}" tilte="view"class="col-4"><i class='fa fa-file-o' style='font-size:36px'></i></a>
+										</div>
+									{% endfor %}
+
+									 {{ formset.management_form }}
+									 {% for form in formset %}
+	                                	<div class="form-group row formset">
+	                                		{% for field in form %}
+	                                		{% if not field.label == "Student" %}
+	                                			{% render_field field class="form-control col-4  mr-2" placeholder=field.label %}
+	                                		{% endif %}
+	                                		{% for error in field.errors %}
+												 <div class="invalid-feedback" style='display: block;'>{{ error }}</div>
+											{% endfor %}
+	                                		{% endfor %}
+	                                		<a href="#" class="ml-5 doc_delete"><i class="fa fa-minus-square" style="font-size:38px;"></i></a>
+									    	
+									 	</div>
+									{% endfor %}
+	                            </div>
+	                            <button type="submit" class="btn btn-primary btn-shadow font-weight-bold mr-2" style="padding: 10px;" form="msform">Submit</button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block java_script %}
+<script src="{% static 'js/jquery.formset.js' %}"></script>
+<script>
+    $('.formset').formset({
+        addText: '<i class="fa fa-plus-square"></i>',
+        deleteText: 'Remove'
+    });
+</script>
+<script type="text/javascript">
+
+	$(document).on("click",".doc_delete", function(){
+		$(this).parent().remove()
+	})
+
+	$(document).ready(function(){
+	    
+	});
+</script>
+{% endblock %}

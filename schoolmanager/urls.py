@@ -23,6 +23,7 @@ urlpatterns = [
     #path('users/', include('users.urls')),
     path('', include('main_website.urls')),
     path('students/', include('students.urls')),
+    path('user/', include('user.urls')),
     #path('docs/', include('documents.urls')),
     #path('accounts/', include('accounts.urls')),
-] +  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] +  static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

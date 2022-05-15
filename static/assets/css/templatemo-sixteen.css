@@ -58,7 +58,7 @@ ul.social-icons li a:hover {
 	color: #fff;
 }
 
-a.filled-button {
+a.filled-button button.filled-button{
 	background-color: #0FE58F;
 	color: #fff;
 	font-size: 14px;
@@ -557,7 +557,7 @@ header .navbar {
 .call-to-action .inner-content {
 	margin-top: 60px;
 	padding: 30px;
-	background-color: #f7f7f7;
+	background-color: #d9d6d0;
 	border-radius: 5px;
 }
 
