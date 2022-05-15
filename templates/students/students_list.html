@@ -9,6 +9,9 @@
 		.hide-mobile {
 		display: none;
 		}
+		.card {
+			padding-top: 15% !important;
+		}
 		}
 	</style>
 {% endblock %}
@@ -100,7 +103,7 @@
                   <th scope="col">Student Name</th>
                   <th scope="col" class='hide-mobile'>Guardian Name</th>
                   <th scope="col">Class</th>                  
-                  <th scope="col" class='hide-mobile'>Status</th>
+                  <th scope="col">Status</th>
                   <th scope="col">Action</th>
                 </tr>
             </thead>
@@ -200,7 +203,7 @@
 						else{
 							status_text = `<span class="badge badge-warning">`+row.status+`</span>`
 						}
-						let row_string = `<tr><td>`+row.sr_no+`</td>`+`<td>`+row.fullname+`</td>`+`<td>`+row.guardian_name+`</td>`+`<td>`+row.class_name+`</td>`+`<td>`+status_text+`</td>`+`<td>`+
+						let row_string = `<tr><td>`+row.sr_no+`</td>`+`<td>`+row.fullname+`</td>`+`<td class='hide-mobile'>`+row.guardian_name+`</td>`+`<td>`+row.class_name+`</td>`+`<td>`+status_text+`</td>`+`<td>`+
 							`<a href="`+ `/students/std_profile/`+ row.id.toString() +`/">`+profile_icon+`</a>`+`<a href="`+ `/students/std_docs/`+ row.id.toString() +`">`+doc_icon+`</a>`+`<a href="`+`/students/std_terminate/`+ row.id.toString() +`">`+terminate_icon+`</a>`+`</td></tr>`
 						$(".table-body").append(row_string)
 					}
