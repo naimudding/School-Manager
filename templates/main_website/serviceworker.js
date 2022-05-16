@@ -1,7 +1,7 @@
 
 var staticCacheName = 'schoolmanager';
 
-var add_list = ["/home", '/offline_page']
+var add_list = ['/home/', 'offline/']
 
 
 self.addEventListener('install', function(event) {
@@ -13,8 +13,6 @@ self.addEventListener('install', function(event) {
 });
 
 self.addEventListener('activate', function(event) {
-  event.waitUntil(
-  );
 });
 
 
@@ -27,6 +25,8 @@ self.addEventListener('fetch', function(event) {
   event.waitUntil(caches.open(staticCacheName)
   .then(cache => fetch(event.request)
     .then(response =>{
+        var url = event.request.url
+        var url = url.replace(location.origin, '')
         if(url.includes('media/') | url.includes('static/')){
           cache.put(event.request, response)
           }
@@ -48,15 +48,10 @@ function fromNetwork(request, timeout) {
 
 function fromCache(request) {
   return caches.open(staticCacheName).then(function (cache) {
-    var requestUrl = new URL(request.url);
-    if(requestUrl.pathname == '' | requestUrl.pathname == '/'){
-      return cache.match('/company')
-    }
-    else {
+    
       return cache.match(request).then(function (matching) {
-        return matching || cache.match('/offline_page')
+        return matching || cache.match('/offline/')
       })
-    }
   });
 }
 

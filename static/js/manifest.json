@@ -11,11 +11,11 @@
     "lang": "en-US",
     "orientation": "portrait-primary",
     "icons": [{
-        "src": "/static/imagee/saadat1.jpeg",
+        "src": "/static/images/insta_square_pwa.png",
         "type": "image/png",
         "sizes": "512x512"
     }, {
-        "src": "/static/images/saadat1.jpeg",
+        "src": "/static/images/insta_square_pwa.png",
         "type": "image/png",
         "sizes": "512x512"
     }]
