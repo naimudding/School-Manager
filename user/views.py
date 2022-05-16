@@ -35,4 +35,4 @@ def login(request):
 
 def logout(request):
 	auth_logout(request)
-	return redirect('user:login')
+	return redirect('main_website:home')
