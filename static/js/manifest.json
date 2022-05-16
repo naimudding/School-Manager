@@ -1,0 +1,22 @@
+{
+    "name": "Sa'Aadat ul uloom",
+    "short_name": "Sa'Aadat",
+    "start_url": "/",
+    "scope": ".",
+    "display": "standalone",
+    "background_color": "#FFF",
+    "theme_color": "#493174",
+    "description": "Sa'Aadat ul uloom",
+    "dir": "ltr",
+    "lang": "en-US",
+    "orientation": "portrait-primary",
+    "icons": [{
+        "src": "/static/imagee/saadat1.jpeg",
+        "type": "image/png",
+        "sizes": "512x512"
+    }, {
+        "src": "/static/images/saadat1.jpeg",
+        "type": "image/png",
+        "sizes": "512x512"
+    }]
+}

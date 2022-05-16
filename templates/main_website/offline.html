@@ -1,0 +1,46 @@
+{% extends 'main_website/base.html' %}
+{% load static %}
+{% block css %}
+<style type="text/css">
+	.wrapper-offline {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    align-items: center;
+    justify-content: center;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    -o-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  h1 {
+    font-family: arial;
+    font-weight: bold;
+    font-size: 50px;
+    letter-spacing: 5px;
+    line-height: 1rem;
+    text-shadow: 0 0 3px white;
+    padding-bottom: 20px;
+  }
+  h4 {
+    font-family: arial;
+    font-weight: 300;
+    font-size: 20px;
+  }
+
+</style>
+
+{% endblock %}
+{% block content %}
+<div class="d-flex flex-column-fluid">
+	<!--begin::Container-->
+	<div class="container-fluid">
+		<div class="wrapper-offline">
+			<h1>You are offline!</h1>
+			<h4>Please check your internet connection.</h4>
+		</div>
+	</div>
+</div>
+{% endblock %}

@@ -3,7 +3,22 @@
 <html lang="en">
 
   <head>
-
+    <script type="text/javascript">
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/serviceworker', {
+                scope: '/'
+            }).then(function (registration) {
+                
+                console.log('django-pwa: ServiceWorker registration successful with scope: ', registration.scope);
+                
+            }, function (err) {
+                
+                console.log('django-pwa: ServiceWorker registration failed: ', err);
+                
+            });
+        }
+    </script>
+    <link rel="manifest" href="{% static 'js/manifest.json' %}">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Official WebPage of Sa'Aadat-ul-uloom">
@@ -109,7 +124,6 @@
               {% endif %}
             </ul>
           </div>
-          <a >Login</a>
         </div>
       </nav>
     </header>
